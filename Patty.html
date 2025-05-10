@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Día de las Madres</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #FFF0F5 0%, #FFE4E1 100%);
+            font-family: 'Brush Script MT', cursive;
+            overflow: hidden;
+        }
+
+        .card {
+            position: relative;
+            width: 90%;
+            max-width: 500px;
+            padding: 40px 20px;
+            text-align: center;
+            z-index: 10;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.2);
+            border: 15px solid transparent;
+            background-clip: padding-box;
+            animation: borderGlow 4s infinite alternate;
+        }
+
+        .message {
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-message {
+            font-size: 2.8rem;
+            color: #D23369;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
+        }
+
+        .signature {
+            font-size: 2.2rem;
+            color: #FF69B4;
+            margin-top: 20px;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 1;
+            animation: floatUp 4s linear forwards;
+            text-shadow: 0 0 5px rgba(255,255,255,0.7);
+        }
+
+        @keyframes floatUp {
+            0% { 
+                transform: translateY(0) rotate(0deg) scale(0.5); 
+                opacity: 0; 
+            }
+            20% { opacity: 1; }
+            100% { 
+                transform: translateY(-100vh) rotate(360deg) scale(1.2); 
+                opacity: 0;
+            }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes borderGlow {
+            0% {
+                border-image: linear-gradient(45deg, #FF69B4, #FF1493) 1;
+                box-shadow: 0 0 15px rgba(255, 105, 180, 0.5);
+            }
+            50% {
+                border-image: linear-gradient(45deg, #FF1493, #FF69B4) 1;
+                box-shadow: 0 0 25px rgba(255, 20, 147, 0.7);
+            }
+            100% {
+                border-image: linear-gradient(45deg, #FFB6C1, #FF69B4) 1;
+                box-shadow: 0 0 15px rgba(255, 182, 193, 0.5);
+            }
+        }
+
+        .border-decoration {
+            position: absolute;
+            font-size: 24px;
+            color: #FF69B4;
+        }
+
+        @media (max-width: 600px) {
+            .main-message { font-size: 2.2rem; }
+            .signature { font-size: 1.8rem; }
+            .card { border-width: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <!-- Decoración de borde -->
+        <div class="border-decoration" style="top: 10px; left: 10px;">❤</div>
+        <div class="border-decoration" style="top: 10px; right: 10px;">❤</div>
+        <div class="border-decoration" style="bottom: 10px; left: 10px;">❤</div>
+        <div class="border-decoration" style="bottom: 10px; right: 10px;">❤</div>
+        
+        <div class="message">
+            <div class="main-message">Feliz Día de las Madres</div>
+            <div class="signature">Att: Saul</div>
+        </div>
+    </div>
+
+    <script>
+        // Colores de corazones
+        const heartColors = ['#FF0000', '#FF69B4', '#FFB6C1', '#FF1493', '#DB7093'];
+        
+        // Crear corazones continuamente
+        function createHearts() {
+            for(let i = 0; i < 8; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '❤';
+                    heart.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.bottom = '-20px';
+                    heart.style.fontSize = (15 + Math.random() * 20) + 'px';
+                    heart.style.animationDuration = 3 + Math.random() * 4 + 's';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 7000);
+                }, i * 150);
+            }
+        }
+
+        // Crear corazones iniciales
+        for(let i = 0; i < 40; i++) {
+            setTimeout(() => {
+                createHearts();
+            }, i * 200);
+        }
+
+        // Continuar creando corazones
+        setInterval(createHearts, 600);
+
+        // Decoración adicional del borde
+        const decorations = ['❀', '✿', '🌸', '💐', '🌺'];
+        for(let i = 0; i < 12; i++) {
+            const deco = document.createElement('div');
+            deco.className = 'border-decoration';
+            deco.innerHTML = decorations[Math.floor(Math.random() * decorations.length)];
+            deco.style.color = heartColors[Math.floor(Math.random() * heartColors.length)];
+            deco.style.position = 'absolute';
+            
+            if(i < 3) {
+                // Parte superior
+                deco.style.top = '10px';
+                deco.style.left = (20 + (i * 30)) + '%';
+            } else if(i < 6) {
+                // Derecha
+                deco.style.right = '10px';
+                deco.style.top = (20 + ((i-3) * 30)) + '%';
+            } else if(i < 9) {
+                // Inferior
+                deco.style.bottom = '10px';
+                deco.style.left = (20 + ((i-6) * 30)) + '%';
+            } else {
+                // Izquierda
+                deco.style.left = '10px';
+                deco.style.top = (20 + ((i-9) * 30)) + '%';
+            }
+            
+            document.querySelector('.card').appendChild(deco);
+        }
+    </script>
+</body>
+</html>
